@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Create User";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+    var users = ViewBag.Users as List<User>;
+}
+
+<div class="container mt-5">
+    <!-- Top-right Back to Dashboard button -->
+    <div class="d-flex justify-content-end mb-3">
+        <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Create a New User</h4>
+        </div>
+
+        <div class="card-body">
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <form asp-action="CreateUser" method="post">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input class="form-control" name="fullName" placeholder="Enter full name" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input class="form-control" name="username" placeholder="Enter username" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" name="password" type="password" placeholder="Enter password" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input class="form-control" name="phoneNumber" placeholder="Enter phone number" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">User Type</label>
+                    <select name="userType" class="form-control" required>
+                        <option value="admin">Admin</option>
+                        <option value="agent">Agent</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Create User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h4 class="mb-3">All Users</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Phone</th>
+                        <th>User Type</th>
+                        <th style="width: 120px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in users)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.FullName</td>
+                            <td>@user.Username</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@user.UserType</td>
+                            <td>
+                                <form asp-action="DeleteUser" method="post" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@user.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@model List<Service>
+@{
+    ViewData["Title"] = "Create Service";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-5">
+    <!-- Top-right Back to Dashboard button -->
+    <div class="d-flex justify-content-end mb-3">
+        <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Create a New Service</h4>
+        </div>
+
+        <div class="card-body">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+
+            <form asp-action="CreateService" method="post">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label class="form-label">Service Name</label>
+                    <input class="form-control" name="name" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fees</label>
+                    <input class="form-control" name="fees" type="number" step="0.01" required />
+                </div>
+                <button class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Add Service
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h4 class="mb-3">All Services</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Fees</th>
+                        <th style="width: 180px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var service in Model)
+                    {
+                        <tr>
+                            <td>@service.Id</td>
+                            <td>@service.Name</td>
+                            <td>@service.Fees.ToString("C")</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="@Url.Action("DeleteService", "Admin", new { id = service.Id })" class="btn btn-sm btn-outline-danger">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

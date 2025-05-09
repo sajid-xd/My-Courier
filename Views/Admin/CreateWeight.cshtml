@@ -1,0 +1,79 @@
+﻿@model List<Weight>
+@{
+    ViewData["Title"] = "Create Weight";
+    Layout = "/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-5">
+    <!-- Back to Dashboard button aligned top-right -->
+    <div class="d-flex justify-content-end mb-3">
+        <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Create a New Weight</h4>
+        </div>
+
+        <div class="card-body">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+            }
+
+            <form asp-action="CreateWeight" method="post">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label class="form-label">Weight Name</label>
+                    <input class="form-control" name="name" required />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fees</label>
+                    <input class="form-control" name="fees" type="number" step="0.01" required />
+                </div>
+                <div class="text-end">
+                    <button class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Add Weight
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="mt-5">
+        <h4 class="mb-3">All Weights</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Fees</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var wt in Model)
+                    {
+                        <tr>
+                            <td>@wt.Id</td>
+                            <td>@wt.Name</td>
+                            <td>@wt.Fees</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="@Url.Action("DeleteWeight", "Admin", new { id = wt.Id })" class="btn btn-sm btn-outline-danger">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

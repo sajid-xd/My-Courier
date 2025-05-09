@@ -1,0 +1,50 @@
+﻿@model MyCourier.Models.ViewModels.AgentCreateUserViewModel
+
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Views/Shared/_LayoutAgent.cshtml";
+}
+
+<h4>Create New User</h4>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<form method="post" asp-action="CreateUser" asp-controller="Agent">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-6 mb-2">
+            <input asp-for="FullName" class="form-control" placeholder="Full Name" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-2">
+            <input asp-for="Username" class="form-control" placeholder="Username" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-2">
+            <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-2">
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <select asp-for="UserType" class="form-select">
+                <option value="user">User</option>
+            </select>
+            <span asp-validation-for="UserType" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Create User</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

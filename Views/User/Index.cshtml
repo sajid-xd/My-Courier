@@ -1,0 +1,46 @@
+﻿@model MyCourier.Models.UserDashboardViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard - MyCourier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between mb-4">
+            <h2>Welcome, @Model.UserName (User)</h2>
+            <a href="@Url.Action("Logout", "Home")" class="btn btn-danger">Logout</a>
+        </div>
+
+        <!-- List Deliveries -->
+        <h4>Your Deliveries</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tracking ID</th>
+                    <th>Receiver</th>
+                    <th>Service</th>
+                    <th>Weight</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var delivery in Model.Deliveries)
+                {
+                    <tr>
+                        <td>@delivery.TrackingId</td>
+                        <td>@delivery.ReceiverName</td>
+                        <td>@delivery.Service.Name</td>
+                        <td>@delivery.Weight.Name</td>
+                        <td>@delivery.Location.Name</td>
+                        <td>@delivery.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
