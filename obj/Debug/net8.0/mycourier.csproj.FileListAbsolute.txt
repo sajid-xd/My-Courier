@@ -458,3 +458,4 @@ C:\Users\SAJID\source\repos\mycourier\bin\Debug\net8.0\runtimes\win\lib\net7.0\M
 C:\Users\SAJID\source\repos\mycourier\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\SAJID\source\repos\mycourier\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\SAJID\source\repos\mycourier\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+C:\Users\SAJID\source\repos\mycourier\obj\Debug\net8.0\scopedcss\Views\Shared\_LayoutTrack.cshtml.rz.scp.css

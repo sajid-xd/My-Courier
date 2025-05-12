@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
-using MyCourier.Models;  // This should be the correct namespace for the context
+using MyCourier.Models;
 using System.Linq;
-using mycourier.Models;
 using Microsoft.EntityFrameworkCore;
-using mycourier.Models.ViewModels;
 using MyCourier.Models.ViewModels;
-
+using mycourier.Models;
 
 namespace MyCourier.Controllers
 {
@@ -18,7 +16,6 @@ namespace MyCourier.Controllers
         {
             _context = context;
         }
-
 
         // Agent's Dashboard (Index)
         public IActionResult Index()
@@ -44,53 +41,126 @@ namespace MyCourier.Controllers
                 Locations = _context.Locations.ToList(),
                 Deliveries = _context.Deliveries
                     .Where(d => d.AgentId == agentId)
-                    .Include(d => d.Service)    // Include related Service
-                    .Include(d => d.Weight)     // Include related Weight
-                    .Include(d => d.Location)   // Include related Location
-                    .Include(d => d.Sender)     // Include related Sender
+                    .Include(d => d.Service)
+                    .Include(d => d.Weight)
+                    .Include(d => d.Location)
+                    .Include(d => d.Sender)
                     .ToList()
             };
 
             return View(model);
         }
 
-
-        // Create a New User
-        [HttpPost]
-        public IActionResult CreateUser(string fullName, string username, string password, string phoneNumber, string userType)
+        // GET method to show the CreateUser form
+        [HttpGet("create-user")]
+        public IActionResult CreateUser()
         {
-            if (_context.Users.Any(u => u.PhoneNumber == phoneNumber))
+            var model = new AgentCreateUserViewModel
             {
-                ViewBag.ErrorMessage = "Phone number already exists!";
-                return RedirectToAction("Index");
+                ExistingUsers = _context.Users
+                    .Where(u => u.UserType == "user")
+                    .OrderByDescending(u => u.Id)
+                    .ToList()
+            };
+
+            return View(model);
+        }
+
+        // POST method to handle user creation
+        [HttpPost("create-usser")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateUser(AgentCreateUserViewModel model)
+        {
+            if (_context.Users.Any(u => u.PhoneNumber == model.PhoneNumber))
+            {
+                TempData["ErrorMessage"] = "Phone number already exists!";
+                model.ExistingUsers = _context.Users.Where(u => u.UserType == "user").ToList();
+                return View(model);
             }
 
-            var hashedPassword = password;
             var newUser = new User
             {
-                FullName = fullName,
-                Username = username,
-                Password = hashedPassword,
-                PhoneNumber = phoneNumber,
-                UserType = userType
+                FullName = model.FullName,
+                Username = model.Username,
+                Password = model.Password,
+                PhoneNumber = model.PhoneNumber,
+                UserType = model.UserType
             };
 
             _context.Users.Add(newUser);
             _context.SaveChanges();
 
-            ViewBag.SuccessMessage = "New user added successfully!";
-            return RedirectToAction("Index");
+            TempData["SuccessMessage"] = "New user added successfully!";
+            return RedirectToAction("CreateUser");
         }
 
+        // GET method to delete a user
+        [HttpGet("delete-user/{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id && u.UserType == "user");
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "User not found or invalid.";
+                return RedirectToAction("CreateUser");
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "User deleted successfully.";
+            return RedirectToAction("CreateUser");
+        }
+
+        // GET method to show the form for creating a delivery
+        [HttpGet]
+        public IActionResult CreateDelivery()
+        {
+            var agentId = HttpContext.Session.GetInt32("id");
+            if (agentId == null)
+            {
+                return RedirectToAction("Logout", "Account");
+            }
+
+            var model = new CreateDeliveryViewModel
+            {
+                Users = _context.Users.Where(u => u.UserType == "user").ToList(),
+                Services = _context.Services.ToList(),
+                Weights = _context.Weights.ToList(),
+                Locations = _context.Locations.ToList(),
+                Deliveries = _context.Deliveries
+                    .Where(d => d.AgentId == agentId)
+                    .Include(d => d.Service)
+                    .Include(d => d.Weight)
+                    .Include(d => d.Location)
+                    .Include(d => d.Sender)
+                    .ToList()
+            };
+
+            return View(model);
+        }
+
+        // POST method to handle delivery creation
         [HttpPost]
         public IActionResult CreateDelivery(CreateDeliveryViewModel model)
         {
-            if (!ModelState.IsValid)
+            var agentId = HttpContext.Session.GetInt32("id");
+
+            if (agentId == null)
             {
-                return View(model); // return with validation errors if any
+                return RedirectToAction("Logout", "Account");
             }
 
-            var agentId = HttpContext.Session.GetInt32("id");
+            if (!ModelState.IsValid)
+            {
+                // Re-populate the lists because they are null when the model is posted
+                model.Users = _context.Users.Where(u => u.UserType == "user").ToList();
+                model.Services = _context.Services.ToList();
+                model.Weights = _context.Weights.ToList();
+                model.Locations = _context.Locations.ToList();
+
+                return View("CreateDelivery", model); // explicitly return correct view
+            }
 
             string trackingId;
             do
@@ -116,8 +186,8 @@ namespace MyCourier.Controllers
             _context.Deliveries.Add(newDelivery);
             _context.SaveChanges();
 
-            ViewBag.SuccessMessage = $"Delivery created with Tracking ID: {trackingId}";
-            return RedirectToAction("Index");
+            TempData["SuccessMessage"] = $"Delivery created with Tracking ID: {trackingId}";
+            return RedirectToAction("CreateDelivery");
         }
     }
 }

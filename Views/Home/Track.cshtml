@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Track Your Shipment";
+    var delivery = ViewBag.Delivery;
+    Layout = "/Views/Shared/_LayoutTrack.cshtml";
+}
+<section class="d-flex align-items-center justify-content-center" style="min-height: 100vh; background: linear-gradient(120deg, #f3f4f6, #e2e8f0);">
+    <div class="container py-5 px-3 position-relative">
+
+        <!-- 🔝 Back to Dashboard Button -->
+        <div class="d-flex justify-content-end mb-4 mr-5">
+            <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-1"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="row justify-content-center g-5">
+            <!-- LEFT: FORM -->
+            <div class="col-lg-5">
+                <div class="mb-4 text-center">
+                    <h1 class="fw-bold text-dark display-6">Track Your Shipment</h1>
+                    <p class="text-muted">Enter your tracking ID below to get live updates on your parcel.</p>
+                </div>
+
+                <!-- ERROR -->
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger shadow-sm d-flex align-items-center" role="alert">
+                        <i class="bi bi-exclamation-circle-fill me-2"></i> @ViewBag.Error
+                    </div>
+                }
+
+                <!-- FORM -->
+                <div class="p-4 bg-white shadow-sm rounded-4 border border-light">
+                    <form asp-action="Track" method="post" class="needs-validation" novalidate>
+                        <label for="trackingId" class="form-label text-muted">Tracking ID</label>
+                        <div class="input-group input-group-lg">
+                            <input type="text" id="trackingId" name="tracking_id" class="form-control border-end-0" placeholder="e.g., XZY123456789" required />
+                            <button type="submit" class="btn btn-dark px-4">Track</button>
+                        </div>
+                    </form>
+                    <small class="text-muted mt-2 d-block text-center">Need help? <a href="/support">Contact Support</a></small>
+                </div>
+            </div>
+
+            <!-- RIGHT: DELIVERY INFO -->
+            @if (delivery != null)
+            {
+                <div class="col-lg-6">
+                    <div class="glass-box shadow-lg rounded-4 border p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                            <h5 class="text-primary fw-semibold mb-0"><i class="bi bi-truck me-2"></i>Shipment Details</h5>
+                            <span class="badge bg-dark px-3 py-2">@delivery.Status</span>
+                        </div>
+                        <div class="row g-3 text-dark">
+                            <div class="col-md-6">
+                                <small class="text-muted">Tracking ID</small>
+                                <div class="fw-semibold">@delivery.TrackingId</div>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">Sender Phone</small>
+                                <div>@delivery.SenderPhone</div>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">Receiver</small>
+                                <div>@delivery.ReceiverName</div>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">Service</small>
+                                <div>@delivery.ServiceName</div>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">From</small>
+                                <div>@delivery.FromAddress</div>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">To</small>
+                                <div>@delivery.ToAddress</div>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">Weight</small>
+                                <div>@delivery.WeightName</div>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">Current Location</small>
+                                <div>@delivery.LocationName</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .glass-box {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+</style>

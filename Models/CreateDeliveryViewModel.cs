@@ -1,29 +1,25 @@
-﻿// Models/ViewModels/CreateDeliveryViewModel.cs
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using mycourier.Models;
+using MyCourier.Models; // or your correct model namespace
 
-namespace mycourier.Models.ViewModels
+namespace MyCourier.Models.ViewModels
 {
     public class CreateDeliveryViewModel
     {
-        [Required]
         public string FromAddress { get; set; }
-
-        [Required]
         public string ToAddress { get; set; }
-
-        [Required]
         public int SenderId { get; set; }
-
-        [Required]
         public string ReceiverName { get; set; }
-
-        [Required]
         public int ServiceId { get; set; }
-
-        [Required]
         public int WeightId { get; set; }
-
-        [Required]
         public int LocationId { get; set; }
+
+        public List<User> Users { get; set; } = new();
+        public List<Service> Services { get; set; } = new();
+        public List<Weight> Weights { get; set; } = new();
+        public List<Location> Locations { get; set; } = new();
+
+        // ✅ This is the key part
+        public List<Delivery> Deliveries { get; set; } = new();
     }
 }

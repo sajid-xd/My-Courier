@@ -71,11 +71,11 @@ namespace mycourier.Controllers
             if (delivery == null)
             {
                 ViewBag.Error = "No delivery found with that tracking ID!";
-                return View("Index");
+                return View("Track");
             }
 
             ViewBag.Delivery = delivery;
-            return View("Index");
+            return View("Track");
         }
         public IActionResult Logout()
         {

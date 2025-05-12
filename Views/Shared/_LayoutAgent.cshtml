@@ -52,7 +52,7 @@
                 <!--- Sidemenu -->
                 <ul class="side-nav">
 
-                    <li class="side-nav-title side-nav-item">ADMIN</li>
+                    <li class="side-nav-title side-nav-item">AGENT</li>
 
                     <li class="side-nav-item">
                         <a asp-controller="Agent" asp-action="CreateUser" class="side-nav-link">
@@ -60,7 +60,7 @@
                             <span> Create New User </span>
                         </a>
 
-                        <a asp-controller="#" asp-action="#" class="side-nav-link">
+                        <a asp-controller="Agent" asp-action="CreateDelivery" class="side-nav-link">
                             <i class="uil-home-alt"></i>
                             <span> Create Delivery </span>
                         </a>
@@ -245,7 +245,7 @@
     <!-- demo app -->
     <script src="../assets/js/pages/demo.dashboard.js"></script>
     <!-- end demo js-->
-        @* @RenderSection("Scripts", required: false) *@
+        @RenderSection("Scripts", required: false)
 
 </body>
 

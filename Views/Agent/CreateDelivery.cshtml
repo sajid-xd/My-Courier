@@ -1,0 +1,204 @@
+﻿@model MyCourier.Models.ViewModels.CreateDeliveryViewModel
+
+@{
+    ViewData["Title"] = "Agent Dashboard";
+    Layout = "/Views/Shared/_LayoutAgent.cshtml";
+}
+<div class="container mt-5">
+    <div class="d-flex justify-content-end mb-3">
+        <a href="@Url.Action("Index", "Agent")" class="btn btn-secondary">
+            <i class="bi bi-arrow-left-circle"></i> Back to Dashboard
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Add New Delivery</h4>
+        </div>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+        <div class="card-body">
+            <form method="post" asp-action="CreateDelivery">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">From Address</label>
+                        <input name="fromAddress" class="form-control" placeholder="From Address" required />
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">To Address</label>
+                        <input name="toAddress" class="form-control" placeholder="To Address" required />
+                    </div>
+                    <div class="col-md-6 mb-3 position-relative">
+                        <label class="form-label">Sender (Phone)</label>
+
+                        <!-- Search input -->
+                        <input type="text" id="senderSearch" class="form-control mb-2" placeholder="Search sender..."
+                               oninput="filterSenders()"
+                               onfocus="showSenderList()"
+                               onclick="showSenderList()">
+
+                        <!-- List of senders -->
+                        <div class="border rounded bg-white position-absolute w-100 d-none" id="senderList" style="max-height: 200px; overflow-y: auto; z-index: 1000;">
+                            @foreach (var user in Model.Users)
+                            {
+                                <div class="dropdown-item sender-option" data-id="@user.Id" onclick="selectSender(this)">
+                                    @user.PhoneNumber
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Hidden field for selected ID -->
+                        <input type="hidden" name="senderId" id="selectedSenderId" required>
+                    </div>
+
+                    <script>
+                        // Filter list as user types
+                        function filterSenders() {
+                            const input = document.getElementById('senderSearch').value.toLowerCase();
+                            const items = document.querySelectorAll('.sender-option');
+
+                            items.forEach(item => {
+                                const text = item.textContent.toLowerCase();
+                                item.style.display = text.includes(input) ? 'block' : 'none';
+                            });
+                        }
+
+                        // Show list
+                        function showSenderList() {
+                            document.getElementById('senderList').classList.remove('d-none');
+                        }
+
+                        // Select sender and hide list
+                        function selectSender(element) {
+                            const id = element.getAttribute('data-id');
+                            const text = element.textContent;
+
+                            document.getElementById('senderSearch').value = text;
+                            document.getElementById('selectedSenderId').value = id;
+
+                            document.getElementById('senderList').classList.add('d-none');
+                        }
+
+                        // Hide list when clicking outside
+                        document.addEventListener('click', function (e) {
+                            const searchInput = document.getElementById('senderSearch');
+                            const senderList = document.getElementById('senderList');
+
+                            if (!searchInput.contains(e.target) && !senderList.contains(e.target)) {
+                                senderList.classList.add('d-none');
+                            }
+                        });
+                    </script>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Receiver Name</label>
+                        <input name="receiverName" class="form-control" placeholder="Receiver Name" required />
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Service</label>
+                        <select id="serviceId" name="serviceId" class="form-control" required>
+                            <option value="">Select Service</option>
+                            @foreach (var service in Model.Services)
+                            {
+                                <option value="@service.Id" data-price="@service.Fees">@service.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Weight</label>
+                        <select id="weightId" name="weightId" class="form-control" required>
+                            <option value="">Select Weight</option>
+                            @foreach (var weight in Model.Weights)
+                            {
+                                <option value="@weight.Id" data-price="@weight.Fees">@weight.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Location</label>
+                        <select id="locationId" name="locationId" class="form-control" required>
+                            <option value="">Select Location</option>
+                            @foreach (var location in Model.Locations)
+                            {
+                                <option value="@location.Id" data-price="@location.Fees">@location.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="text-end mt-3">
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-plus-circle"></i> Create Delivery
+                    </button>
+                </div>
+            </form>
+            <div id="totalFee" class="alert alert-info mt-4">Total Fee: PKR 0.00</div>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <h4 class="mb-3">Your Deliveries</h4>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Tracking ID</th>
+                        <th>Sender Phone</th>
+                        <th>Receiver</th>
+                        <th>Service</th>
+                        <th>Weight</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var delivery in Model.Deliveries)
+                    {
+                        <tr>
+                            <td>@delivery.TrackingId</td>
+                            <td>@delivery.Sender.PhoneNumber</td>
+                            <td>@delivery.ReceiverName</td>
+                            <td>@delivery.Service.Name</td>
+                            <td>@delivery.Weight.Name</td>
+                            <td>@delivery.Location.Name</td>
+                            <td>@delivery.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const serviceSelect = document.getElementById("serviceId");
+        const weightSelect = document.getElementById("weightId");
+        const locationSelect = document.getElementById("locationId");
+        const totalFeeDisplay = document.getElementById("totalFee");
+
+        function updateTotal() {
+            let total = 0;
+
+            const serviceOption = serviceSelect.options[serviceSelect.selectedIndex];
+            const weightOption = weightSelect.options[weightSelect.selectedIndex];
+            const locationOption = locationSelect.options[locationSelect.selectedIndex];
+
+            if (serviceOption && serviceOption.dataset.price) {
+                total += parseFloat(serviceOption.dataset.price);
+            }
+            if (weightOption && weightOption.dataset.price) {
+                total += parseFloat(weightOption.dataset.price);
+            }
+            if (locationOption && locationOption.dataset.price) {
+                total += parseFloat(locationOption.dataset.price);
+            }
+
+            totalFeeDisplay.innerText = "Total Fee: PKR " + total.toFixed(2);
+        }
+
+        serviceSelect.addEventListener("change", updateTotal);
+        weightSelect.addEventListener("change", updateTotal);
+        locationSelect.addEventListener("change", updateTotal);
+    });
+</script>

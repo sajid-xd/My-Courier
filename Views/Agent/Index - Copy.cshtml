@@ -1,0 +1,193 @@
+﻿@model MyCourier.Models.AgentDashboardViewModel
+@{
+    ViewData["Title"] = "Agent Dashboard";
+    Layout = "/Views/Shared/_LayoutAgent.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between mb-4">
+        <h2>Welcome, @Model.AgentName (Agent)</h2>
+        <a href="/Home/Logout" class="btn btn-danger">Logout</a>
+    </div>
+
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+    }
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    <!-- Create New User -->
+    <h4>Create New User</h4>
+    <form method="post" asp-action="CreateUser" class="mb-5">
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <input name="fullName" class="form-control" placeholder="Full Name" required>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input name="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input name="password" type="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input name="phoneNumber" class="form-control" placeholder="Phone Number" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <select name="userType" class="form-select" required>
+                    <option value="user">User</option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Create User</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Create New Delivery -->
+    <h4>Add New Delivery</h4>
+    <form method="post" asp-action="CreateDelivery" class="mb-5">
+        <div class="row">
+            <div class="col-md-6 mb-2">
+                <input name="fromAddress" class="custom-control" placeholder="From Address" required>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input name="toAddress" class="custom-control" placeholder="To Address" required>
+            </div>
+            <div class="col-md-6 mb-2">
+                <select name="senderId" class="custom-control" required>
+                    <option value="">Select Sender (Phone)</option>
+                    @foreach (var user in Model.Users)
+                    {
+                        <option value="@user.Id">@user.PhoneNumber</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-6 mb-2">
+                <input name="receiverName" class="custom-control" placeholder="Receiver Name" required>
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="serviceId" class="form-label">Service</label>
+                <select id="serviceId" name="serviceId" class="custom-control" required>
+                    <option value="">Select Service</option>
+                    @foreach (var service in Model.Services)
+                    {
+                        <option value="@service.Id" data-price="@service.Fees">@service.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <label for="weightId" class="form-label">Weight</label>
+                <select id="weightId" name="weightId" class="custom-control" required>
+                    <option value="">Select Weight</option>
+                    @foreach (var weight in Model.Weights)
+                    {
+                        <option value="@weight.Id" data-price="@weight.Fees">@weight.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-4 mb-2">
+                <label for="locationId" class="form-label">Location</label>
+                <select id="locationId" name="locationId" class="custom-control" required>
+                    <option value="">Select Location</option>
+                    @foreach (var location in Model.Locations)
+                    {
+                        <option value="@location.Id" data-price="@location.Fees">@location.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-success">Create Delivery</button>
+            </div>
+        </div>
+    </form>
+    <style>
+        .custom-control {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: #fff;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-sizing: border-box;
+            appearance: none; /* removes default dropdown arrow in some browsers */
+        }
+
+            .custom-control:focus {
+                border-color: #80bdff;
+                outline: none;
+                box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+            }
+
+    </style>
+    <div id="totalFee" class="alert alert-info mt-3">Total Fee: PKR 0.00</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const serviceSelect = document.getElementById("serviceId");
+            const weightSelect = document.getElementById("weightId");
+            const locationSelect = document.getElementById("locationId");
+            const totalFeeDisplay = document.getElementById("totalFee");
+
+            function updateTotal() {
+                let total = 0;
+
+                const serviceOption = serviceSelect.options[serviceSelect.selectedIndex];
+                const weightOption = weightSelect.options[weightSelect.selectedIndex];
+                const locationOption = locationSelect.options[locationSelect.selectedIndex];
+
+                if (serviceOption && serviceOption.dataset.price) {
+                    total += parseFloat(serviceOption.dataset.price);
+                }
+                if (weightOption && weightOption.dataset.price) {
+                    total += parseFloat(weightOption.dataset.price);
+                }
+                if (locationOption && locationOption.dataset.price) {
+                    total += parseFloat(locationOption.dataset.price);
+                }
+
+                totalFeeDisplay.innerText = "Total Fee: PKR " + total.toFixed(2);
+            }
+
+            serviceSelect.addEventListener("change", updateTotal);
+            weightSelect.addEventListener("change", updateTotal);
+            locationSelect.addEventListener("change", updateTotal);
+        });
+    </script>
+
+    <!-- List Deliveries -->
+    <h4>Your Deliveries</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Tracking ID</th>
+                <th>Sender Phone</th>
+                <th>Receiver</th>
+                <th>Service</th>
+                <th>Weight</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var delivery in Model.Deliveries)
+            {
+                <tr>
+                    <td>@delivery.TrackingId</td>
+                    <td>@delivery.Sender.PhoneNumber</td>
+                    <td>@delivery.ReceiverName</td>
+                    <td>@delivery.Service.Name</td>
+                    <td>@delivery.Weight.Name</td>
+                    <td>@delivery.Location.Name</td>
+                    <td>@delivery.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
