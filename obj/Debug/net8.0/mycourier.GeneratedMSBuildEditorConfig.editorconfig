@@ -17,105 +17,105 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = mycourier
 build_property.RootNamespace = mycourier
-build_property.ProjectDir = C:\Users\SAJID\source\repos\mycourier\
+build_property.ProjectDir = C:\Users\SAJID\source\repos\My-Courier\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\SAJID\source\repos\mycourier
+build_property.MSBuildProjectDirectory = C:\Users\SAJID\source\repos\My-Courier
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Admin/CreateLocation.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Admin/CreateLocation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlTG9jYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Admin/CreateService.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Admin/CreateService.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlU2VydmljZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Admin/CreateUser.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Admin/CreateUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Admin/CreateWeight.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Admin/CreateWeight.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlV2VpZ2h0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Admin/Index - Copy.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Admin/Index - Copy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXggLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Admin/Index.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Agent/CreateDelivery.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Agent/CreateDelivery.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcQ3JlYXRlRGVsaXZlcnkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Agent/CreateUser.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Agent/CreateUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcQ3JlYXRlVXNlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Agent/Index - Copy.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Agent/Index - Copy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcSW5kZXggLSBDb3B5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Agent/Index.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Agent/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Home/Index.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Home/Login.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Home/Privacy.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Home/Track.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Home/Track.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUcmFjay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Shared/Error.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Shared/_LayoutAdmin.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Shared/_LayoutAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Shared/_LayoutAgent.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Shared/_LayoutAgent.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRBZ2VudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/User/Index.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/_ViewImports.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/_ViewStart.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Shared/_Layout.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-g5e32y39rv
 
-[C:/Users/SAJID/source/repos/mycourier/Views/Shared/_LayoutTrack.cshtml]
+[C:/Users/SAJID/source/repos/My-Courier/Views/Shared/_LayoutTrack.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRUcmFjay5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = b-hbiuxdcqzo

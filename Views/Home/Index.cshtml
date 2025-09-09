@@ -4,12 +4,15 @@
 }
 
 <div class="ftco-blocks-cover-1">
-    <div class="ftco-cover-1 overlay" style="background-image: url('https://source.unsplash.com/pSyfecRCBQA/1920x780')">
+    <div class="ftco-cover-1 overlay" style="background-image: url('https://images.unsplash.com/photo-1582469062319-9d6a6a9eb4f2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1>Choose Your Quality Delivery of Your Cargo</h1>
-                    <p class="mb-5">Handcrafted with love by the fine folks at <a href="https://free-template.co/" target="_blank">Free-Template.co</a></p>
+                    <h1>Experience Reliable, High-Quality Cargo Delivery Tailored to Your Needs.</h1>
+                    <p class="mb-5">
+                        Follow Your Delivery Journey <span style="font-size: 1.2em;">&#8595;</span>
+                    </p>
+
 
                     <!-- Razor-based Tracking Form -->
                     <form asp-action="Track" method="post">
@@ -70,134 +73,161 @@
         </div>
     </div>
 
-    <!-- END .ftco-cover-1 -->
-    <div class="ftco-service-image-1 pb-5">
+    <!-- START Service Options Section -->
+    <div class="ftco-service-image-1 pb-5" id="delivery-services">
         <div class="container">
+            <!-- Carousel for displaying delivery services -->
             <div class="owl-carousel owl-all">
-                <div class="service text-center">
-                    <a href="#"><img src="images/cargo_sea_small.jpg" alt="Image" class="img-fluid"></a>
+
+                <!-- Service: Sea Freight -->
+                <div class="service text-center" data-service="sea" data-type="logistics" data-speed="slow">
+                    <a href="#">
+                        <img src="https://images.unsplash.com/photo-1617952739760-1dcae19a1d93?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8U2VhJTIwRnJlaWdodHxlbnwwfHwwfHx8Mg%3D%3D" alt="Sea Freight" class="img-fluid">
+                    </a>
                     <div class="px-md-3">
                         <h3><a href="#">Sea Freight</a></h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                        <p>Reliable and economical solution for transporting bulk cargo across continents with long lead times.</p>
                     </div>
                 </div>
-                <div class="service text-center">
-                    <a href="#"><img src="images/cargo_air_small.jpg" alt="Image" class="img-fluid"></a>
+
+                <!-- Service: Air Freight -->
+                <div class="service text-center" data-service="air" data-type="logistics" data-speed="fast">
+                    <a href="#">
+                        <img src="https://images.unsplash.com/photo-1732322237622-3e4a51c4dd6e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fEFpciUyMEZyZWlnaHR8ZW58MHx8MHx8fDI%3D" alt="Air Freight" class="img-fluid">
+                    </a>
                     <div class="px-md-3">
                         <h3><a href="#">Air Freight</a></h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                        <p>Fastest delivery option for high-priority shipments, ensuring speed, security, and global reach.</p>
                     </div>
                 </div>
-                <div class="service text-center">
-                    <a href="#"><img src="images/cargo_delivery_small.jpg" alt="Image" class="img-fluid"></a>
+
+                <!-- Service: Package Forwarding -->
+                <div class="service text-center" data-service="package" data-type="support" data-speed="medium">
+                    <a href="#">
+                        <img src="https://images.unsplash.com/photo-1614018453562-77f6180ce036?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjA4fHxQYWNrYWdlJTIwRm9yd2FyZGluZ3xlbnwwfHwwfHx8Mg%3D%3D" alt="Package Forwarding" class="img-fluid">
+                    </a>
                     <div class="px-md-3">
                         <h3><a href="#">Package Forwarding</a></h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.</p>
+                        <p>Efficient handling and forwarding of parcels from multiple sources to a single international address.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END Service Options Section -->
+    <!-- START What We Offer Section -->
+    <div class="site-section bg-light" id="services-section">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-7 text-center">
+                    <div class="block-heading-1">
+                        <h2>What We Offer</h2>
+                        <p>Explore our complete logistics and shipping solutions tailored to meet diverse delivery and freight requirements.</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Services Carousel -->
+            <div class="owl-carousel owl-all">
+
+                <!-- Service: Sea Freight -->
+                <div class="block__35630" data-service="sea">
+                    <div class="icon mb-0">
+                        <span class="flaticon-ferry"></span>
+                    </div>
+                    <h3 class="mb-3">Sea Freight</h3>
+                    <p>Ideal for transporting large volumes of cargo internationally at lower costs with flexible scheduling options.</p>
+                </div>
+
+                <!-- Service: Air Freight -->
+                <div class="block__35630" data-service="air">
+                    <div class="icon mb-0">
+                        <span class="flaticon-airplane"></span>
+                    </div>
+                    <h3 class="mb-3">Air Freight</h3>
+                    <p>Fast and secure delivery method for time-sensitive or high-value shipments across global destinations.</p>
+                </div>
+
+                <!-- Service: Package Forwarding -->
+                <div class="block__35630" data-service="forwarding">
+                    <div class="icon mb-0">
+                        <span class="flaticon-box"></span>
+                    </div>
+                    <h3 class="mb-3">Package Forwarding</h3>
+                    <p>Consolidate and forward parcels efficiently from one location to any global destination of your choice.</p>
+                </div>
+
+                <!-- Service: Trucking -->
+                <div class="block__35630" data-service="trucking">
+                    <div class="icon mb-0">
+                        <span class="flaticon-lorry"></span>
+                    </div>
+                    <h3 class="mb-3">Trucking</h3>
+                    <p>Reliable overland transport for regional deliveries with real-time tracking and optimized delivery routes.</p>
+                </div>
+
+                <!-- Service: Warehouse -->
+                <div class="block__35630" data-service="warehouse">
+                    <div class="icon mb-0">
+                        <span class="flaticon-warehouse"></span>
+                    </div>
+                    <h3 class="mb-3">Warehousing</h3>
+                    <p>Secure and modern storage facilities with inventory management and 24/7 monitoring support.</p>
+                </div>
+
+                <!-- Service: Delivery -->
+                <div class="block__35630" data-service="delivery">
+                    <div class="icon mb-0">
+                        <span class="flaticon-add"></span>
+                    </div>
+                    <h3 class="mb-3">Last-Mile Delivery</h3>
+                    <p>Timely door-to-door delivery solutions that ensure customer satisfaction and on-time handoffs.</p>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
+    <!-- END What We Offer Section -->
+    <!-- START Why Choose Us Section -->
+    <div class="block__73694 site-section border-top" id="why-us-section">
+        <div class="container">
+            <div class="row d-flex no-gutters align-items-stretch">
 
-
-<div class="site-section bg-light" id="services-section">
-    <div class="container">
-        <div class="row mb-5 justify-content-center">
-            <div class="col-md-7 text-center">
-                <div class="block-heading-1">
-                    <h2>What We Offer</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <!-- Image Section -->
+                <div class="col-12 col-lg-6 block__73422 order-lg-2"
+                     style="background-image: url('https://images.unsplash.com/photo-1609143739217-01b60dad1c67?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGRlbGl2ZXJ5fGVufDB8fDB8fHwy');"
+                     data-aos="fade-left"
+                     data-aos-delay="">
+                    <!-- Background image handles the visual -->
                 </div>
-            </div>
-        </div>
-        <div class="owl-carousel owl-all">
-            <div class="block__35630">
-                <div class="icon mb-0">
-                    <span class="flaticon-ferry"></span>
-                </div>
-                <h3 class="mb-3">Sea Freight</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-            </div>
 
-            <div class="block__35630">
-                <div class="icon mb-0">
-                    <span class="flaticon-airplane"></span>
-                </div>
-                <h3 class="mb-3">Air Freight</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-            </div>
+                <!-- Content Section -->
+                <div class="col-lg-5 mr-auto p-lg-5 mt-4 mt-lg-0 order-lg-1"
+                     data-aos="fade-right"
+                     data-aos-delay="">
+                    <h2 class="mb-4 text-black">Why Choose Us</h2>
+                    <h4 class="text-primary">Fast, Reliable, and Built for Your Needs</h4>
+                    <p>
+                        At our Post Office Management System, we combine technology with logistics expertise
+                        to ensure fast delivery, secure handling, and customer satisfaction. Every shipment
+                        is tracked, protected, and delivered with precision.
+                    </p>
 
-            <div class="block__35630">
-                <div class="icon mb-0">
-                    <span class="flaticon-box"></span>
+                    <ul class="ul-check primary list-unstyled mt-5">
+                        <li>Speedy and reliable cargo delivery options</li>
+                        <li>End-to-end shipment security</li>
+                        <li>Modern warehousing with smart inventory systems</li>
+                        <li>Optimized routes to reduce cost and delivery time</li>
+                        <li>Trusted by industry-leading logistics providers</li>
+                    </ul>
                 </div>
-                <h3 class="mb-3">Package Forwarding</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-            </div>
 
-            <div class="block__35630">
-                <div class="icon mb-0">
-                    <span class="flaticon-lorry"></span>
-                </div>
-                <h3 class="mb-3">Trucking</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
             </div>
-
-            <div class="block__35630">
-                <div class="icon mb-0">
-                    <span class="flaticon-warehouse"></span>
-                </div>
-                <h3 class="mb-3">Warehouse</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-            </div>
-
-            <div class="block__35630">
-                <div class="icon mb-0">
-                    <span class="flaticon-add"></span>
-                </div>
-                <h3 class="mb-3">Delivery</h3>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. </p>
-            </div>
-
         </div>
     </div>
-</div>
-
-
-
-
-
-
-
-
-<div class="block__73694 site-section border-top" id="why-us-section">
-    <div class="container">
-        <div class="row d-flex no-gutters align-items-stretch">
-
-            <div class="col-12 col-lg-6 block__73422 order-lg-2" style="background-image: url('../images/cargo_sea_small.jpg');" data-aos="fade-left" data-aos-delay="">
-            </div>
-
-
-
-            <div class="col-lg-5 mr-auto p-lg-5 mt-4 mt-lg-0 order-lg-1" data-aos="fade-right" data-aos-delay="">
-                <h2 class="mb-4 text-black">Why Us</h2>
-                <h4 class="text-primary">We work quickly and efficiently!</h4>
-                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-
-                <ul class="ul-check primary list-unstyled mt-5">
-                    <li>Cargo express</li>
-                    <li>Secure Services</li>
-                    <li>Secure Warehouseing</li>
-                    <li>Cost savings</li>
-                    <li>Proven by great companies</li>
-                </ul>
-
-            </div>
-
-        </div>
-    </div>
-</div>
+    <!-- END Why Choose Us Section -->
 
 
    
@@ -215,45 +245,87 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="100">
-                <form action="#" method="post">
-                    <div class="form-group row">
-                        <div class="col-md-6 mb-4 mb-lg-0">
-                            <input type="text" class="form-control" placeholder="First name">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="First name">
-                        </div>
-                    </div>
+                <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="100">
+                    <div id="formContainer">
+                        <form action="#" method="post" id="contactForm">
+                            <div class="form-group row">
+                                <div class="col-md-6 mb-4 mb-lg-0">
+                                    <input type="text" class="form-control" name="firstName" placeholder="First name">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lastName" placeholder="Last name">
+                                </div>
+                            </div>
 
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" placeholder="Email address">
-                        </div>
-                    </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="email" placeholder="Email address">
+                                </div>
+                            </div>
 
-                    <div class="form-group row">
-                        <div class="col-md-12">
-                            <textarea name="" id="" class="form-control" placeholder="Write your message." cols="30" rows="10"></textarea>
-                        </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <textarea name="message" class="form-control" placeholder="Write your message." cols="30" rows="10"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 mr-auto">
+                                    <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-6 mr-auto">
-                            <input type="submit" class="btn btn-block btn-primary text-white py-3 px-5" value="Send Message">
-                        </div>
+                    <div id="successMessage" style="display: none;">
+                        <h4>Thanks for contacting us!</h4>
                     </div>
-                </form>
-            </div>
+                </div>
+
+                <script>
+                    // Save form data to cookies
+                    document.getElementById('contactForm').addEventListener('submit', function(e) {
+                        e.preventDefault(); // Stop form from submitting
+
+                        const form = e.target;
+                        const formData = new FormData(form);
+
+                        formData.forEach((value, key) => {
+                            document.cookie = `${key}=${encodeURIComponent(value)}; path=/; max-age=86400`;
+                        });
+
+                        // Hide form and show success message
+                        document.getElementById('formContainer').style.display = 'none';
+                        document.getElementById('successMessage').style.display = 'block';
+                    });
+
+                    // Prefill form from cookies if available
+                    window.addEventListener('DOMContentLoaded', () => {
+                        const cookies = document.cookie.split('; ');
+                        const cookieData = {};
+                        cookies.forEach(cookie => {
+                            const [key, value] = cookie.split('=');
+                            cookieData[key] = decodeURIComponent(value || '');
+                        });
+
+                        const form = document.getElementById('contactForm');
+                        if (form) {
+                            form.elements['firstName'].value = cookieData.firstName || '';
+                            form.elements['lastName'].value = cookieData.lastName || '';
+                            form.elements['email'].value = cookieData.email || '';
+                            form.elements['message'].value = cookieData.message || '';
+                        }
+                    });
+                </script>
+
             <div class="col-lg-4 ml-auto" data-aos="fade-up" data-aos-delay="200">
                 <div class="bg-white p-3 p-md-5">
                     <h3 class="text-black mb-4">Contact Info</h3>
                     <ul class="list-unstyled footer-link">
                         <li class="d-block mb-3">
                             <span class="d-block text-black">Address:</span>
-                            <span>34 Street Name, City Name Here, United States</span>
+                            <span>V2HF+G2Q, Nishtar Rd, Garden West Area, Karachi</span>
                         </li>
-                        <li class="d-block mb-3"><span class="d-block text-black">Phone:</span><span>+1 242 4942 290</span></li>
-                        <li class="d-block mb-3"><span class="d-block text-black">Email:</span><span>info@yourdomain.com</span></li>
+                        <li class="d-block mb-3"><span class="d-block text-black">Phone:</span><span>+92 3132571970</span></li>
+                        <li class="d-block mb-3"><span class="d-block text-black">Email:</span><span>postsystem@gmail.com</span></li>
                     </ul>
                 </div>
             </div>

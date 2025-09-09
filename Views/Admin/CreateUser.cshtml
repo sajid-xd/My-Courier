@@ -1,11 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Create User";
+﻿@model mycourier.Models.User
+@{
+    ViewData["Title"] = Model != null && Model.Id != 0 ? "Update User" : "Create User";
     Layout = "/Views/Shared/_LayoutAdmin.cshtml";
     var users = ViewBag.Users as List<User>;
 }
 
 <div class="container mt-5">
-    <!-- Top-right Back to Dashboard button -->
     <div class="d-flex justify-content-end mb-3">
         <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">
             <i class="bi bi-arrow-left"></i> Back to Dashboard
@@ -14,11 +14,14 @@
 
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Create a New User</h4>
+            <h4 class="mb-0">@ViewData["Title"]</h4>
         </div>
 
         <div class="card-body">
-
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
             @if (TempData["SuccessMessage"] != null)
             {
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,33 +32,66 @@
 
             <form asp-action="CreateUser" method="post">
                 @Html.AntiForgeryToken()
+                @if (Model != null && Model.Id != 0)
+                {
+                    <input type="hidden" name="id" value="@Model.Id" />
+                }
+
                 <div class="mb-3">
                     <label class="form-label">Full Name</label>
-                    <input class="form-control" name="fullName" placeholder="Enter full name" required />
+                    <input class="form-control" name="fullName" placeholder="Enter full name" required
+                           value="@(Model?.FullName ?? "")" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Username</label>
-                    <input class="form-control" name="username" placeholder="Enter username" required />
+                    <input class="form-control" name="username" placeholder="Enter username" required
+                           value="@(Model?.Username ?? "")" />
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input class="form-control" name="password" type="password" placeholder="Enter password" required />
+                    <label class="form-label">Password @if(Model != null && Model.Id != 0){ <small>(Leave blank to keep current password)</small> }</label>
+                    <input class="form-control" name="password" type="password" placeholder="Enter password" @(Model == null || Model.Id == 0 ? "required" : "") />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Phone</label>
-                    <input class="form-control" name="phoneNumber" placeholder="Enter phone number" required />
+                    <input class="form-control" name="phoneNumber" placeholder="Enter phone number" required
+                           value="@(Model?.PhoneNumber ?? "")" />
                 </div>
                 <div class="mb-3">
                     <label class="form-label">User Type</label>
                     <select name="userType" class="form-control" required>
-                        <option value="admin">Admin</option>
-                        <option value="agent">Agent</option>
-                        <option value="user">User</option>
+                        @if (Model?.UserType == "admin")
+                        {
+                            <option value="admin" selected>Admin</option>
+                        }
+                        else
+                        {
+                            <option value="admin">Admin</option>
+                        }
+
+                        @if (Model?.UserType == "agent")
+                        {
+                            <option value="agent" selected>Agent</option>
+                        }
+                        else
+                        {
+                            <option value="agent">Agent</option>
+                        }
+
+                        @if (Model?.UserType == "user")
+                        {
+                            <option value="user" selected>User</option>
+                        }
+                        else
+                        {
+                            <option value="user">User</option>
+                        }
                     </select>
                 </div>
+
                 <div class="text-end">
-                    <button type="submit" class="btn btn-success">
-                        <i class="bi bi-plus-circle"></i> Create User
+                    <button type="submit" class="btn @(Model != null && Model.Id != 0 ? "btn-primary" : "btn-success")">
+                        <i class="bi @(Model != null && Model.Id != 0 ? "bi-pencil-square" : "bi-plus-circle")"></i>
+                        @(Model != null && Model.Id != 0 ? "Update User" : "Create User")
                     </button>
                 </div>
             </form>
@@ -85,13 +121,19 @@
                             <td>@user.Username</td>
                             <td>@user.PhoneNumber</td>
                             <td>@user.UserType</td>
-                            <td>
-                                <form asp-action="DeleteUser" method="post" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                            <td class="d-flex gap-2">
+                                <!-- Edit Button -->
+                                <a href="@Url.Action("CreateUser", "Admin", new { id = user.Id })" class="btn btn-sm btn-outline-primary me-1">Edit</a>
+
+                                <!-- Delete Button -->
+
+                                <form asp-action="DeleteUser" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@user.Id" />
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                                 </form>
                             </td>
+                          
                         </tr>
                     }
                 </tbody>

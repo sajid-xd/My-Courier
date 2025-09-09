@@ -37,38 +37,102 @@ namespace mycourier.Controllers
         }
 
         // Action to add a new user
-        [HttpPost]
-        public IActionResult CreateUser(string fullName, string username, string password, string phoneNumber, string userType)
-        {
-            var hashedPassword = password;
-
-            var newUser = new User
-            {
-                FullName = fullName,
-                Username = username,
-                Password = hashedPassword,
-                PhoneNumber = phoneNumber,
-                UserType = userType
-            };
-
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
-
-            TempData["SuccessMessage"] = "New user added successfully!";
-            return RedirectToAction("CreateUser");
-        }
-
+        // GET: Admin/CreateUser or Admin/CreateUser/{id}
+        // If id is passed, load user data for editing; else new user
         [HttpGet]
-        public IActionResult CreateUser()
+        public IActionResult CreateUser(int? id)
         {
-            // Check if admin
             if (HttpContext.Session.GetString("user_type") != "admin")
             {
-                return RedirectToAction("CreateUser");
+                return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Users = _context.Users.ToList();
-            return View();
+            var users = _context.Users.ToList();
+            ViewBag.Users = users;
+
+            User user = null;
+            if (id.HasValue)
+            {
+                user = _context.Users.Find(id.Value);
+                if (user == null)
+                {
+                    TempData["ErrorMessage"] = "User not found.";
+                    return RedirectToAction("CreateUser");
+                }
+            }
+
+            return View(user);  // Pass user model (null if new)
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateUser(int? id, string fullName, string username, string password, string phoneNumber, string userType)
+        {
+            if (id.HasValue)
+            {
+                // Update existing user
+                var userToUpdate = _context.Users.Find(id.Value);
+                if (userToUpdate == null)
+                {
+                    TempData["ErrorMessage"] = "User not found.";
+                    return RedirectToAction("CreateUser");
+                }
+
+                // Check for username or phone uniqueness excluding current user
+                if (_context.Users.Any(u => u.Username == username && u.Id != id))
+                {
+                    TempData["ErrorMessage"] = "Username already exists. Please choose a different one.";
+                    return RedirectToAction("CreateUser", new { id });
+                }
+
+                if (_context.Users.Any(u => u.PhoneNumber == phoneNumber && u.Id != id))
+                {
+                    TempData["ErrorMessage"] = "Phone number already exists. Please use a different one.";
+                    return RedirectToAction("CreateUser", new { id });
+                }
+
+                userToUpdate.FullName = fullName;
+                userToUpdate.Username = username;
+                if (!string.IsNullOrEmpty(password))
+                {
+                    userToUpdate.Password = password; // You may want to hash it
+                }
+                userToUpdate.PhoneNumber = phoneNumber;
+                userToUpdate.UserType = userType;
+
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "User updated successfully!";
+                return RedirectToAction("CreateUser");
+            }
+            else
+            {
+                // Create new user (your existing logic)
+                if (_context.Users.Any(u => u.Username == username))
+                {
+                    TempData["ErrorMessage"] = "Username already exists. Please choose a different one.";
+                    return RedirectToAction("CreateUser");
+                }
+                if (_context.Users.Any(u => u.PhoneNumber == phoneNumber))
+                {
+                    TempData["ErrorMessage"] = "Phone number already exists. Please use a different one.";
+                    return RedirectToAction("CreateUser");
+                }
+
+                var newUser = new User
+                {
+                    FullName = fullName,
+                    Username = username,
+                    Password = password, // Consider hashing this
+                    PhoneNumber = phoneNumber,
+                    UserType = userType
+                };
+
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
+
+                TempData["SuccessMessage"] = "New user added successfully!";
+                return RedirectToAction("CreateUser");
+            }
         }
 
 

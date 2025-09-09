@@ -1038,8 +1038,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>85gghdj4bz</Fingerprint>
-      <Integrity>vOrXqze6FftbkiZI+CdvgyyRkOTSEIy605IRXu+B+jw=</Integrity>
+      <Fingerprint>atlcvrtvlp</Fingerprint>
+      <Integrity>blR6SMzK8ZZzwz76R7K+EbTxFFrDpF8c0IzU8S+00s8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\images\bg-auth.jpg'))</OriginalItemSpec>
@@ -4188,8 +4188,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>k1wwmjr3u5</Fingerprint>
-      <Integrity>ONw442h60ywwVL77cXAxNXgGS9kotXVJ+qXxhfZc+3Y=</Integrity>
+      <Fingerprint>dt2dhk2hy1</Fingerprint>
+      <Integrity>f8/noyftg4rFjzpjxx8qnZsWn5RU98oGnceuKwm7u1s=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\style.css'))</OriginalItemSpec>

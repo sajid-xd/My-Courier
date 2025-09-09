@@ -5,19 +5,19 @@
 <!-- Mirrored from coderthemes.com/hyper/saas/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 31 Jul 2022 14:49:16 GMT -->
 <head>
     <meta charset="utf-8" />
-    <title>Dashboard | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
+    <title>Post Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
 
     <!-- third party css -->
-    <link href="../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
     <!-- third party css end -->
     <!-- App css -->
-    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="~/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
 </head>
 
@@ -28,24 +28,25 @@
         <div class="leftside-menu">
 
             <!-- LOGO -->
-            <a href="index.html" class="logo text-center logo-light">
+            <div class="logo text-center logo-light">
                 <span class="logo-lg">
-                    <img src="../assets/images/logo.png" alt="" height="16">
+                    <h4 class="mt-4" style="color: #6da2f5;">POST MANAGEMENT</h4>
                 </span>
                 <span class="logo-sm">
-                    <img src="../assets/images/logo_sm.png" alt="" height="16">
+                    <h5 class="mt-4" style="color: #6da2f5;">ADMIN</h5>
                 </span>
-            </a>
+            </div>
 
             <!-- LOGO -->
-            <a href="index.html" class="logo text-center logo-dark">
+            <div class="logo text-center logo-light">
                 <span class="logo-lg">
-                    <img src="../assets/images/logo-dark.png" alt="" height="16">
+                    <h4 class="mt-4" style="color: #6da2f5;">POST MANAGEMENT</h4>
                 </span>
                 <span class="logo-sm">
-                    <img src="../assets/images/logo_sm_dark.png" alt="" height="16">
+                    <h5 class="mt-4" style="color: #6da2f5;">ADMIN</h5>
                 </span>
-            </a>
+            </div>
+
 
             <div class="h-100" id="leftside-menu-container" data-simplebar>
 
@@ -56,22 +57,22 @@
 
                     <li class="side-nav-item">
                         <a asp-controller="Admin" asp-action="CreateUser" class="side-nav-link">
-                            <i class="uil-home-alt"></i>
+                            <i class="uil-user-plus"></i>
                             <span> Create New User </span>
                         </a>
 
                         <a asp-controller="Admin" asp-action="CreateService" class="side-nav-link">
-                            <i class="uil-home-alt"></i>
+                            <i class="uil-truck-loading"></i>
                             <span> Add Services </span>
                         </a>
 
                         <a asp-controller="Admin" asp-action="CreateLocation" class="side-nav-link">
-                            <i class="uil-home-alt"></i>
+                            <i class="uil-location-point"></i>
                             <span> Add Locationss </span>
                         </a>
 
                         <a asp-controller="Admin" asp-action="CreateWeight" class="side-nav-link">
-                            <i class="uil-home-alt"></i>
+                            <i class="uil-weight"></i>
                             <span> Add Weights </span>
                         </a>
                     </li>
@@ -117,7 +118,7 @@
     <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
        aria-expanded="false">
         <span class="account-user-avatar">
-            <img src="../assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+            <img src="~/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
         </span>
         <span>
             <span class="account-user-name">@Context.Session.GetString("full_name")</span>
@@ -130,11 +131,7 @@
             <h6 class="text-overflow m-0">Welcome!</h6>
         </div>
 
-        <!-- item-->
-        <a href="javascript:void(0);" class="dropdown-item notify-item">
-            <i class="mdi mdi-account-circle me-1"></i>
-            <span>My Account</span>
-        </a>
+     
 
         <!-- item-->
         <a href="/home/logout" class="dropdown-item notify-item">
@@ -150,13 +147,7 @@
                         <i class="mdi mdi-menu"></i>
                     </button>
                     <div class="app-search dropdown d-none d-lg-block">
-                        <form>
-                            <div class="input-group">
-                                <input type="text" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
-                                <span class="mdi mdi-magnify search-icon"></span>
-                                <button class="input-group-text btn-primary" type="submit">Search</button>
-                            </div>
-                        </form>
+                      
 
                         <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
                             <!-- item-->
@@ -191,7 +182,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="d-flex">
-                                        <img class="d-flex me-2 rounded-circle" src="../assets/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
+                                        <img class="d-flex me-2 rounded-circle" src="~/assets/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
                                         <div class="w-100">
                                             <h5 class="m-0 font-14">Erwin Brown</h5>
                                             <span class="font-12 mb-0">UI Designer</span>
@@ -202,7 +193,7 @@
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="d-flex">
-                                        <img class="d-flex me-2 rounded-circle" src="../assets/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
+                                        <img class="d-flex me-2 rounded-circle" src="~/assets/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
                                         <div class="w-100">
                                             <h5 class="m-0 font-14">Jacob Deo</h5>
                                             <span class="font-12 mb-0">Developer</span>
@@ -220,16 +211,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
-                        <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
+                                <script>document.write(new Date().getFullYear())</script> © Post Office Management System
                     </div>
-                    <div class="col-md-6">
-                        <div class="text-md-end footer-links d-none d-md-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
+                  
             </div>
         </footer>
         <!-- end Footer -->
@@ -242,16 +226,16 @@
     </div>
     <!-- END wrapper -->
     <!-- bundle -->
-    <script src="../assets/js/vendor.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
+    <script src="~/assets/js/vendor.min.js"></script>
+    <script src="~/assets/js/app.min.js"></script>
 
     <!-- third party js -->
-    <script src="../assets/js/vendor/apexcharts.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/assets/js/vendor/apexcharts.min.js"></script>
+    <script src="~/assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
     <!-- third party js ends -->
     <!-- demo app -->
-    <script src="../assets/js/pages/demo.dashboard.js"></script>
+    <script src="~/assets/js/pages/demo.dashboard.js"></script>
     <!-- end demo js-->
 </body>
 

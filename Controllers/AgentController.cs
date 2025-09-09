@@ -23,13 +23,13 @@ namespace MyCourier.Controllers
             var agentId = HttpContext.Session.GetInt32("id"); // Assuming session stores user ID
             if (agentId == null)
             {
-                return RedirectToAction("Logout", "Account");
+                return RedirectToAction("Logout", "home");
             }
 
             var agent = _context.Users.Find(agentId);
             if (agent?.UserType != "agent")
             {
-                return RedirectToAction("Logout", "Account");
+                return RedirectToAction("Logout", "home");
             }
 
             var model = new AgentDashboardViewModel
@@ -67,13 +67,20 @@ namespace MyCourier.Controllers
         }
 
         // POST method to handle user creation
-        [HttpPost("create-usser")]
+        [HttpPost("create-user")]
         [ValidateAntiForgeryToken]
         public IActionResult CreateUser(AgentCreateUserViewModel model)
         {
             if (_context.Users.Any(u => u.PhoneNumber == model.PhoneNumber))
             {
                 TempData["ErrorMessage"] = "Phone number already exists!";
+                model.ExistingUsers = _context.Users.Where(u => u.UserType == "user").ToList();
+                return View(model);
+            }
+
+            if (_context.Users.Any(u => u.Username == model.Username))
+            {
+                TempData["ErrorMessage"] = "Username already exists!";
                 model.ExistingUsers = _context.Users.Where(u => u.UserType == "user").ToList();
                 return View(model);
             }
@@ -91,6 +98,72 @@ namespace MyCourier.Controllers
             _context.SaveChanges();
 
             TempData["SuccessMessage"] = "New user added successfully!";
+            return RedirectToAction("CreateUser");
+        }
+
+        // GET method to show the form for editing a user
+        [HttpGet("edit-user/{id}")]
+        public IActionResult EditUser(int id)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id && u.UserType == "user");
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "User not found or invalid.";
+                return RedirectToAction("CreateUser");
+            }
+
+            var model = new AgentCreateUserViewModel
+            {
+                Id = user.Id,
+                FullName = user.FullName,
+                Username = user.Username,
+                PhoneNumber = user.PhoneNumber,
+                Password = user.Password,
+                UserType = user.UserType,
+                ExistingUsers = _context.Users.Where(u => u.UserType == "user").ToList()
+            };
+
+            return View("CreateUser", model); // Reuse the CreateUser view
+        }
+
+        // POST method to handle user update
+        [HttpPost("edit-user/{id}")]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditUser(int id, AgentCreateUserViewModel model)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id && u.UserType == "user");
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "User not found or invalid.";
+                return RedirectToAction("CreateUser");
+            }
+
+            // Check for duplicate phone number except this user
+            if (_context.Users.Any(u => u.PhoneNumber == model.PhoneNumber && u.Id != id))
+            {
+                TempData["ErrorMessage"] = "Phone number already exists!";
+                model.ExistingUsers = _context.Users.Where(u => u.UserType == "user").ToList();
+                return View("CreateUser", model);
+            }
+
+            // Check for duplicate username except this user
+            if (_context.Users.Any(u => u.Username == model.Username && u.Id != id))
+            {
+                TempData["ErrorMessage"] = "Username already exists!";
+                model.ExistingUsers = _context.Users.Where(u => u.UserType == "user").ToList();
+                return View("CreateUser", model);
+            }
+
+            user.FullName = model.FullName;
+            user.Username = model.Username;
+            user.Password = model.Password;
+            user.PhoneNumber = model.PhoneNumber;
+            user.UserType = model.UserType;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            TempData["SuccessMessage"] = "User updated successfully!";
             return RedirectToAction("CreateUser");
         }
 
@@ -119,7 +192,7 @@ namespace MyCourier.Controllers
             var agentId = HttpContext.Session.GetInt32("id");
             if (agentId == null)
             {
-                return RedirectToAction("Logout", "Account");
+                return RedirectToAction("Logout", "home");
             }
 
             var model = new CreateDeliveryViewModel
@@ -148,18 +221,7 @@ namespace MyCourier.Controllers
 
             if (agentId == null)
             {
-                return RedirectToAction("Logout", "Account");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                // Re-populate the lists because they are null when the model is posted
-                model.Users = _context.Users.Where(u => u.UserType == "user").ToList();
-                model.Services = _context.Services.ToList();
-                model.Weights = _context.Weights.ToList();
-                model.Locations = _context.Locations.ToList();
-
-                return View("CreateDelivery", model); // explicitly return correct view
+                return RedirectToAction("Logout", "home");
             }
 
             string trackingId;

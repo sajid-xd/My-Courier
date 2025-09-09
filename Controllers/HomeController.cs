@@ -83,11 +83,6 @@ namespace mycourier.Controllers
             return RedirectToAction("Index"); // Redirect to login/index page
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

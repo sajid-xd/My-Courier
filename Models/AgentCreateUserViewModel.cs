@@ -7,6 +7,8 @@ namespace MyCourier.Models.ViewModels
 {
     public class AgentCreateUserViewModel
     {
+        public int Id { get; set; }  // <-- Add this for update scenarios
+
         [Required(ErrorMessage = "Full Name is required")]
         public string FullName { get; set; }
 

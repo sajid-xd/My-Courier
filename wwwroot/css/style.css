@@ -312,9 +312,7 @@ h1, h2, h3, h4, h5,
 .site-footer {
   padding: 4em 0;
   background: #333333; }
-  @media (min-width: 768px) {
-    .site-footer {
-      padding: 8em 0; } }
+
   .site-footer .border-top {
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important; }
   .site-footer p {
@@ -1313,7 +1311,7 @@ h1, h2, h3, h4, h5,
       left: 0;
       right: 0;
       bottom: 0;
-      opacity: .95;
+      opacity: .90;
       background: #377aff;
       background: -moz-linear-gradient(45deg, #377aff 0%, #00d9ff 100%);
       background: -webkit-gradient(left bottom, right top, color-stop(0%, #377aff), color-stop(100%, #00d9ff));

@@ -18,7 +18,7 @@ namespace MyCourier.Controllers
         // GET: User/Dashboard
         public ActionResult Dashboard()
         {
-            // Assuming you store the logged-in user's ID in User.Identity.Name or via claims
+            // Assuming you store the logged-in user's ID in User.Identity.Name
             var username = User.Identity.Name;
 
             // Get the user record
@@ -26,6 +26,7 @@ namespace MyCourier.Controllers
 
             if (user == null)
             {
+                // If the user isn't found, redirect to login
                 return RedirectToAction("Login", "Home");
             }
 
@@ -43,6 +44,7 @@ namespace MyCourier.Controllers
                 })
                 .ToList();
 
+            // Build the dashboard view model
             var viewModel = new UserDashboardViewModel
             {
                 UserName = user.UserName,
